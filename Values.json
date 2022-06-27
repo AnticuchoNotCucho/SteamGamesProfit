@@ -1,0 +1,38 @@
+[
+  {
+    "Game":"Barro",
+    "MeanValue":15.5
+  },
+  {
+    "Game":"Seen",
+    "MeanValue":19.22
+  },
+  {
+    "Game":"Rock 'N' Roll Defense",
+    "MeanValue":14.88
+  },
+  {
+    "Game":"Barro 2020",
+    "MeanValue":15.5
+  },
+  {
+    "Game":"Barro F",
+    "MeanValue":24.18
+  },
+  {
+    "Game":"Barro Racing",
+    "MeanValue":14.26
+  },
+  {
+    "Game":"Ninja Stealth",
+    "MeanValue":17.36
+  },
+  {
+    "Game":"Ninja Stealth 3",
+    "MeanValue":13.02
+  },
+  {
+    "Game":"Ninja Stealth 2",
+    "MeanValue":19.84
+  }
+]
