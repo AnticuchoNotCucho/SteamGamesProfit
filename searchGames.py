@@ -110,11 +110,12 @@ for game in games_json:
         print(array)
         mean = np.mean(array)*(amount_cards/2)
         mean = mean * 124
-        profit = game['Price']
-        mean_values.append((game['Title'],np.round(mean, 2), game['Price'],game['discount']))
+        profit = mean - game['Price']
+        mean_values.append((game['Title'],np.round(mean, 2), game['Price'],game['Discount'],np.round(profit,2)))
     else: 
         mean_values.append((game['Title'], "No info"))
 
-df = pd.DataFrame(mean_values, columns=['Game','MeanValue','GamePrice','MeanProfit'])
+df = pd.DataFrame(mean_values, columns=['Game','MeanValue','GamePrice','Discount','Profit'])
 df.to_json('Values.json', orient='records', indent=2)
+df.to_csv('Values.csv', index=False)
 print(df)

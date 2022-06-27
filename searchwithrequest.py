@@ -6,17 +6,19 @@ import requests
 
 sys.stdin.reconfigure(encoding='utf-8')
 sys.stdout.reconfigure(encoding='utf-8')
+#$chileno test link: https://store.steampowered.com/search/?sort_by=Price_ASC&maxprice=3000&category1=998%2C996&category2=29&os=win
 
 list_pages = ['https://store.steampowered.com/search/?sort_by=Price_ASC&maxprice=70&category1=998%2C996&category2=29&os=win'
-               'https://store.steampowered.com/search/?sort_by=Price_ASC&sort_order=ASC&category1=998%2C996&category2=29&price=%2C70&os=win&maxprice=70&page=2',
-              'https://store.steampowered.com/search/?sort_by=Price_ASC&sort_order=ASC&category1=998%2C996&category2=29&price=%2C70&os=win&maxprice=70&page=3',
-               'https://store.steampowered.com/search/?sort_by=Price_ASC&sort_order=ASC&category1=998%2C996&category2=29&price=%2C70&os=win&maxprice=70&page=4',
-               'https://store.steampowered.com/search/?sort_by=Price_ASC&sort_order=ASC&category1=998%2C996&category2=29&price=%2C70&os=win&maxprice=70&page=5',
-               'https://store.steampowered.com/search/?sort_by=Price_ASC&sort_order=ASC&category1=998%2C996&category2=29&price=%2C70&os=win&maxprice=70&page=6',
-               'https://store.steampowered.com/search/?sort_by=Price_ASC&sort_order=ASC&category1=998%2C996&category2=29&price=%2C70&os=win&maxprice=70&page=7',
-               'https://store.steampowered.com/search/?sort_by=Price_ASC&sort_order=ASC&category1=998%2C996&category2=29&price=%2C70&os=win&maxprice=70&page=8',
-               'https://store.steampowered.com/search/?sort_by=Price_ASC&sort_order=ASC&category1=998%2C996&category2=29&price=%2C70&os=win&maxprice=70&page=9',
-               ]
+                'https://store.steampowered.com/search/?sort_by=Price_ASC&sort_order=ASC&category1=998%2C996&category2=29&price=%2C70&os=win&maxprice=70&page=2',
+                'https://store.steampowered.com/search/?sort_by=Price_ASC&sort_order=ASC&category1=998%2C996&category2=29&price=%2C70&os=win&maxprice=70&page=3',
+                'https://store.steampowered.com/search/?sort_by=Price_ASC&sort_order=ASC&category1=998%2C996&category2=29&price=%2C70&os=win&maxprice=70&page=4',
+                'https://store.steampowered.com/search/?sort_by=Price_ASC&sort_order=ASC&category1=998%2C996&category2=29&price=%2C70&os=win&maxprice=70&page=5'
+                ]
+            #    'https://store.steampowered.com/search/?sort_by=Price_ASC&sort_order=ASC&category1=998%2C996&category2=29&price=%2C70&os=win&maxprice=70&page=6',
+            #    'https://store.steampowered.com/search/?sort_by=Price_ASC&sort_order=ASC&category1=998%2C996&category2=29&price=%2C70&os=win&maxprice=70&page=7',
+            #    'https://store.steampowered.com/search/?sort_by=Price_ASC&sort_order=ASC&category1=998%2C996&category2=29&price=%2C70&os=win&maxprice=70&page=8',
+            #    'https://store.steampowered.com/search/?sort_by=Price_ASC&sort_order=ASC&category1=998%2C996&category2=29&price=%2C70&os=win&maxprice=70&page=9',
+               
               
 games = []
 for page in list_pages:
@@ -44,6 +46,7 @@ print(len(games))
 df = pd.DataFrame(games, columns=['Title', 'AppID', 'Price', 'Discount'])
 print(df)    
 df.to_json('games.json', orient='records', indent=4)
+
 
 
 
