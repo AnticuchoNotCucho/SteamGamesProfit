@@ -1,31 +1,51 @@
 import csv
+import json
 import scrapy 
 import chompjs
 from scrapy.spiders import CrawlSpider, Rule
 from scrapy.linkextractors import LinkExtractor
-from searchCards.items import SearchPricesItem
 from scrapy.exceptions import CloseSpider
+import sys
+from searchCards.items import SearchcardsItem
 
-# class SearchPricesSpider(CrawlSpider):
-#     name = 'searchPrices'
-#     item_count = 0
-#     allowed_domains = ['steamcommunity.com']
-    
-#     with open ('outputfile.csv', 'r') as f:
-#         csv_reader = csv.DictReader(f)
-#         for row in csv_reader:
-#             print(row)
-#             appid = row['appid']
-#             hash_name = row['hash_name']
-#             start_urls = ['https://steamcommunity.com/market/priceoverview/?appid='+appid+'&currency=34&market_hash_name='+hash_name]
+sys.stdin.reconfigure(encoding='utf-8')
+sys.stdout.reconfigure(encoding='utf-8')
+
+class SearchCardsSpider(CrawlSpider):
+    name = 'get_cards'
+    allowed_domains = ['steamcommunity.com','steamcardexchange.net']
         
-#     rules = (
-#         Rule(LinkExtractor(allow=(), restrict_xpaths=('/html/body/div[1]/div[6]/div[1]/div/div')), callback='parse_item', follow=True),
-#     )
-#     def parse_item(self, response):
-#         item = SearchPricesItem()
-#         item['lowestprice'] = response.xpath('/html/body/div[1]/div[6]/div[1]/div/div/div/div[5]/div[6]/pre/span/span[2]').get()
-#         item['medianprice'] = response.xpath('/html/body/div[1]/div[5]/div[1]/div/div/div/div[5]/div[8]/pre/span/span[2]').get()
-#         print(item['lowestprice'])
-#         print(item['medianprice'])      
-#         yield item 
+    def start_requests(self):
+        with open('games.json') as f:
+            data = json.load(f)  
+            for game in data:
+                urls = [
+                    'https://www.steamcardexchange.net/index.php?gamepage-appid-'+game['AppID']
+                ]
+                for url in urls:
+                    yield scrapy.Request(url=url, callback=self.parse, meta={'game': game})
+            
+    def parse(self, response):
+        links = response.xpath('//*[@id="content-area"]/div[2]/div[4]//div[@class="showcase-element"]/div/a/@href').getall()
+        list_hash_name = []
+        for link in links: #list of hash_name
+            link = link.replace('https://steamcommunity.com/market/listings/','')
+            hash_name = (link[link.find('/'):len(link)])
+            appid = link.replace(hash_name,'')
+            hash_name = hash_name.replace('/','')
+            # x = hash_name[hash_name.find('-'):len(hash_name)]
+            # gameid = hash_name.replace(x,'')
+            list_hash_name.append([hash_name])
+            print(response.meta['game']['Title'])
+        item = SearchcardsItem()
+        item['appid'] = appid
+        item['values'] = list_hash_name
+        item['game'] = response.meta['game']['Title']
+        yield item 
+        list_hash_name.clear()
+            
+    
+       # //*[@id="content-area"]/div[2]/div[4]//div[@class="showcase-element"]//div//a//@href
+        #xpath   https://www.steamcardexchange.net/index.php?gamepage-appid-1334590.get()
+        
+        #https://steamcommunity.com/market/priceoverview/?appid=753&currency=34&market_hash_name=509920-Gaius%20And%20Girder

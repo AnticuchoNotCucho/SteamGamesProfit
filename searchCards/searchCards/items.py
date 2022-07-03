@@ -12,10 +12,12 @@ class SearchcardsItem(scrapy.Item):
     # name = scrapy.Field()
     #https://steamcommunity.com/market/priceoverview/?appid=753&currency=34&market_hash_name=509920-Gaius%20And%20Girder
     appid = scrapy.Field()
-    hash_name = scrapy.Field()
-    url = scrapy.Field()
+    values = scrapy.Field()
+    game = scrapy.Field()
     pass
 
 class SearchPricesItem(scrapy.Item):
+    game = scrapy.Field()
     lowestprice = scrapy.Field()
     medianprice = scrapy.Field()
+    pass
