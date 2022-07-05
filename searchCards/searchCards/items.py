@@ -18,6 +18,5 @@ class SearchcardsItem(scrapy.Item):
 
 class SearchPricesItem(scrapy.Item):
     game = scrapy.Field()
-    lowestprice = scrapy.Field()
-    medianprice = scrapy.Field()
+    prices = scrapy.Field()
     pass
