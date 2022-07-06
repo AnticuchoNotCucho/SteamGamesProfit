@@ -17,6 +17,6 @@ class SearchcardsItem(scrapy.Item):
     pass
 
 class SearchPricesItem(scrapy.Item):
+    price = scrapy.Field()
     game = scrapy.Field()
-    prices = scrapy.Field()
     pass

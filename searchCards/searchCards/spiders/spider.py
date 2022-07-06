@@ -20,7 +20,6 @@ class SearchCardsSpider(CrawlSpider):
         with open('appids.json') as f:
             data = json.load(f)
             for game in data:
-                self.prices.clear()
                 print(game['game'])
                 for card in game['values']:
                     appid = '753'
@@ -28,14 +27,18 @@ class SearchCardsSpider(CrawlSpider):
                         'https://steamcommunity.com/market/priceoverview/?appid='+appid+'&currency=34&market_hash_name='+str(card).replace('[','').replace(']','').replace("'",'')
                             ]
                     for url in urls:
-                        scrapy.Request(url=url, callback=self.parse_item)
+                     yield scrapy.Request(url=url, callback=self.parse_item, meta={'game': game['game']})
                     
                         
 #https://steamcommunity.com/market/priceoverview/?appid=753&currency=34&market_hash_name=509920-Gaius%20And%20Girder
     
     def parse_item(self, response):
         jsonresponse = json.loads(response.text)
-        self.prices.append(jsonresponse['lowest_price'])
+        item = SearchPricesItem()
+        item['price'] = jsonresponse['lowest_price']
+        item['game'] = response.meta['game']
+        yield item
+        
         
         
         
