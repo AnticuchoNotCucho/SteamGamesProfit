@@ -1,11 +1,5 @@
 [
-{"appid": "753", "values": 
-    [["381870-Porcupine"], 
-    ["381870-Banker (Trading Card)"], 
-    ["381870-Hidden"], 
-    ["381870-Bongo"], 
-    ["381870-Donkey (Trading Card)"],
-    ["381870-Piggie"]], "game": "Koala Kids"},
+{"appid": "753", "values":    [["381870-Porcupine"],    ["381870-Banker (Trading Card)"],    ["381870-Hidden"],     ["381870-Bongo"],     ["381870-Donkey (Trading Card)"],   ["381870-Piggie"]], "game": "Koala Kids"},
 {"appid": "753", "values": [["474830-Timer"], ["474830-Warp"], ["474830-Booster"], ["474830-AT-38"], ["474830-AT%20Point"]], "game": "Time in Time"},
 {"appid": "753", "values": [["570890-Mystery%20Man"], ["570890-Father"], ["570890-Masko"], ["570890-Demon%20King"], ["570890-Zombies"]], "game": "Fallen"},
 {"appid": "753", "values": [["604140-Coin"], ["604140-Beetle"], ["604140-Dark%20Giant"], ["604140-Goblin"], ["604140-Ice%20Giant"], ["604140-Scorpion"], ["604140-Ice%20Orc"]], "game": "Broccoli Bob"},
